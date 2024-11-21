@@ -1,0 +1,109 @@
+GET http://localhost:3000/api/users/
+
+###
+POST  http://localhost:3000/api/account/login
+Content-Type: application/json
+
+{
+  "username": "Happy",
+  "password": "abcd"
+}
+
+###
+
+POST http://localhost:3000/api/account/signup/
+Content-Type: application/json
+
+{
+  "username": "Helba 4",
+  "password": "Comi123"
+}
+
+###
+
+GET  http://localhost:3000/api/account/verify
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjIxNzQyNiwiZXhwIjoxNzMyMjIxMDI2fQ.fYiivPIBiSveOSzRMBaeL8rOq35J4b_rS15pmDXAzmg
+
+
+
+
+
+###
+
+
+GET http://localhost:3000/api/cart
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjIyNDMwMywiZXhwIjoxNzMyMjI3OTAzfQ.sLP7MEYuIbFmbvZ692gWVzXfD-k2WJds9vW1VMIKRUg
+###
+
+
+DELETE  http://localhost:3000/api/cart/delete-item
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjIyNDMwMywiZXhwIjoxNzMyMjI3OTAzfQ.sLP7MEYuIbFmbvZ692gWVzXfD-k2WJds9vW1VMIKRUg
+Content-Type: application/json
+
+{
+  "id": "673f14db5fd2fce649d8952b"
+}
+###
+
+###
+
+
+DELETE  http://localhost:3000/api/cart/delete-cart
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjIyNzE4OSwiZXhwIjoxNzMyMjMwNzg5fQ.Opuz_M5zi-FH1a4t2nuMRcmKxbkOUpZzPsJZ-omsCxc
+Content-Type: application/json
+
+###
+
+POST http://localhost:3000/api/cart/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjIyMDEyOSwiZXhwIjoxNzMyMjIzNzI5fQ.tgiK3cZ7neO1D234Mbcjmlba-1xFTIuAJOMPXQ5z1R8
+
+{
+  "items": {
+    "productId": "673f14db5fd2fce649d8952b",
+    "quantity": 2
+  }
+}
+
+###
+GET http://localhost:3000/api/products
+
+###
+
+POST http://localhost:3000/api/products/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2Y2Yjc0MjJiNjhmNDkwY2ZkMzBlYSIsImlhdCI6MTczMjIwOTUyNCwiZXhwIjoxNzMyMjEzMTI0fQ.SCUdko6mp9q-mFzRNCbq5fkc9fm_g9qq4GZUmoVGFgk
+
+{
+  "name": "Battery",
+  "price": 5.99
+}
+
+###
+
+GET http://localhost:3000/api/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjIyNjU2NiwiZXhwIjoxNzMyMjMwMTY2fQ.iKccfufsnMPfrveJVqBgXyzD5LIZhh1mzoGdsrhVdhA
+
+###
+
+POST http://localhost:3000/api/orders/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2Y2Yjc0MjJiNjhmNDkwY2ZkMzBlYSIsImlhdCI6MTczMjIwOTUyNCwiZXhwIjoxNzMyMjEzMTI0fQ.SCUdko6mp9q-mFzRNCbq5fkc9fm_g9qq4GZUmoVGFgk
+
+
+{
+  "items": [
+    {
+      "productId": "673f14cf5fd2fce649d89529",
+      "quantity": 2
+    },
+    {
+      "productId": "673f14db5fd2fce649d8952b",
+      "quantity": 1
+    }
+  ],
+  "totalAmount": 262.97,
+  "status": "pending"
+}
