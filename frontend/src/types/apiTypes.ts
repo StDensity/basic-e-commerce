@@ -38,3 +38,17 @@ export interface Order {
    __v: number;
 }
 
+export interface User {
+   _id: string;
+   username: string;
+   password: string;
+   role: string;
+   createdAt: string;
+   updatedAt: string;
+   __v: number;
+}
+
+export interface adminAuthFailure {
+   allowAccess: boolean;
+   message: string;
+}

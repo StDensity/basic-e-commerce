@@ -1,22 +1,25 @@
 GET http://localhost:3000/api/users/
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2VmOWMzZmFkYzQ1NTE2MjVhZGYyOSIsImlhdCI6MTczMjI2MDM0NSwiZXhwIjoxNzMyMjYzOTQ1fQ.wmajO22K4NltSPsMb0v82A8ZnCxJ6_EFkkcsZend9hE
+###
+GET http://localhost:3000/api/account/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDAzOGQ5YzcwYTgyYzBkN2RhYzRhMyIsImlhdCI6MTczMjI2MjEwNSwiZXhwIjoxNzMyMjY1NzA1fQ.gXHEpZpgFRIwst4xtpoHxLPZPKN6FHNslv9xadcQ7co
 ###
 POST  http://localhost:3000/api/account/login
 Content-Type: application/json
 
 {
-  "username": "Happy",
-  "password": "abcd"
+  "username": "Deleteme",
+  "password": "delete"
 }
 
-###
+### 
 
 POST http://localhost:3000/api/account/signup/
 Content-Type: application/json
 
 {
-  "username": "Helba 4",
-  "password": "Comi123"
+  "username": "Deleteme",
+  "password": "delete"
 }
 
 ###

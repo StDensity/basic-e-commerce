@@ -11,6 +11,7 @@ import {
 
 const HomePage = () => {
    const [products, setProducts] = useState<ProductType[]>([]);
+   
    const navigate = useNavigate();
    useEffect(() => {
       const fetchData = async () => {
@@ -23,6 +24,8 @@ const HomePage = () => {
    const handleAddToCart = async (id: string) => {
       (await isAuthenticated()) ? addItemToTheCartById(id) : navigate("/login");
    };
+
+
    return (
       <div>
          <NavBar />

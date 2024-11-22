@@ -54,6 +54,9 @@ const RenderOrders: React.FC<RenderOrdersProps> = ({ orders }) => {
           {orderProducts.map((product) => (
              <div key={product._id}>{product.name}</div>
           ))}
+          {/* @ts-ignore */}
+          <div>$ {orders[orderIndex].totalAmount} </div>
+          
        </div>
     ))}
  </div>

@@ -62,7 +62,7 @@ const LoginPage = () => {
                </CardContent>
                <CardFooter className="flex justify-between">
                   <Button onClick={() => handleLoginButton()}>Login</Button>
-                  <Button onClick={() => navigate("/signup")}>Signup</Button>
+                  <Button variant={"outline"} onClick={() => navigate("/signup")}>or Signup</Button>
                </CardFooter>
                {showMessage && (
                   <div className="text-red-500 text-center mb-5">

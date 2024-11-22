@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ProductType } from "@/types/apiTypes";
+import DisplayCartItemCount from "./DisplayCartItemCount";
+import { useEffect, useState } from "react";
+import { getCartItems, getProductDetailsById } from "@/utils/auth";
 
 interface DisplayProductsProps {
    products: ProductType[];
@@ -7,6 +10,44 @@ interface DisplayProductsProps {
 }
 
 const DisplayProducts = (props: DisplayProductsProps) => {
+   const [cartItemCount, setCartItemCount] = useState<number>();
+
+   const handleAddToCartButton = (id: string) => {
+      if (cartItemCount) {
+         // @ts-ignore
+         setCartItemCount((prev) => prev + 1);
+      }
+      props.handleAddToCart(id);
+   };
+   useEffect(() => {
+      const fetchData = async () => {
+         try {
+            const data = await getCartItems();
+            if (data?.items) {
+               // console.log(data.items)
+               const productsDetails = await Promise.all(
+                  data.items.map(async (item) => {
+                     const product = await getProductDetailsById(
+                        item.productId
+                     );
+                     return product;
+                  })
+               );
+               const filteredProducts = productsDetails.filter(
+                  (product) => product !== undefined
+               );
+
+               setCartItemCount(filteredProducts.length);
+               //    console.log(filteredProducts)
+            }
+         } catch (error) {
+            console.error("Error fetching cart items or products:", error);
+         }
+      };
+
+      fetchData();
+   }, []);
+
    const renderProducts = () =>
       props.products.map((product, index) => (
          <div
@@ -25,7 +66,7 @@ const DisplayProducts = (props: DisplayProductsProps) => {
                <Button
                   className="bg-gray-400 hover:bg-gray-500 border-0"
                   variant="outline"
-                  onClick={() => props.handleAddToCart(product._id)}
+                  onClick={() => handleAddToCartButton(product._id)}
                >
                   Add to Cart
                </Button>
@@ -35,7 +76,12 @@ const DisplayProducts = (props: DisplayProductsProps) => {
 
    return (
       <div>
-         <div className="text-4xl font-bold text-gray-600">Products</div>
+         <div className="flex justify-between text-4xl font-bold text-gray-600">
+            <div className="">Products</div>
+            <div>
+               <DisplayCartItemCount count={cartItemCount} />
+            </div>
+         </div>
          <div className="flex flex-wrap gap-6 mt-3">{renderProducts()}</div>
       </div>
    );

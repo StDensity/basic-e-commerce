@@ -1,8 +1,10 @@
 import {
+   adminAuthFailure,
    CartDetails,
    LoginResponseType,
    Order,
    ProductType,
+   User,
 } from "@/types/apiTypes";
 import axios from "axios";
 import { getTokenFromSession } from "./storage";
@@ -225,6 +227,105 @@ export const dropUserCart = async () => {
          },
       });
       return response;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const getAllUsers = async (): Promise<
+   User[] | undefined | adminAuthFailure
+> => {
+   try {
+      const url = BASE_URL + "users";
+      const token = getTokenFromSession();
+      console.log(token);
+      if (!token) {
+         // @ts-ignore
+         return redirect("/login");
+      }
+
+      const response = await axios.get(url, {
+         headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+         },
+      });
+      return response.data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const addProduct = async (name: string, price: number) => {
+   try {
+      const url = BASE_URL + "products/create";
+      const token = getTokenFromSession();
+      console.log(token);
+      if (!token) {
+         // @ts-ignore
+         return redirect("/login");
+      }
+
+      const response = await axios.post(
+         url,
+         {
+            name: name,
+            price: price,
+         },
+         {
+            headers: {
+               "Content-Type": "application/json",
+               Authorization: `Bearer ${token}`,
+            },
+         }
+      );
+
+      console.log(response.data);
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const createUser = async (username: string, password: string) => {
+   try {
+      const url = BASE_URL + "account/signup/";
+
+      const response = await axios.post(
+         url,
+         {
+            username: username,
+            password: password,
+         },
+         {
+            headers: {
+               "Content-Type": "application/json",
+            },
+         }
+      );
+      return response.data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const deleteUser = async () => {
+   try {
+      const url = BASE_URL + "account/delete/";
+      const token = getTokenFromSession();
+      console.log(token);
+      if (!token) {
+         // @ts-ignore
+         return redirect("/login");
+      }
+
+      const response = await axios.get(url, {
+         headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+         },
+      });
+      console.log(response);
+      return response.data;
    } catch (error) {
       console.log(error);
    }

@@ -1,12 +1,22 @@
 import NavBar from "@/components/NavBar";
 import { Order } from "@/types/apiTypes";
-import { getOrderDetails } from "@/utils/auth";
-import { useEffect, useState } from "react";
+import { getOrderDetails, isAuthenticated } from "@/utils/auth";
+import { useEffect, useLayoutEffect, useState } from "react";
 import RenderOrders from "./RenderOrders";
+import { useNavigate } from "react-router-dom";
 
 const OrdersPage = () => {
    const [orders, setOrders] = useState<Order[]>([]);
-
+   const navigate = useNavigate();
+   useLayoutEffect(() => {
+      const checkAuth = async () => {
+         const authenticated = await isAuthenticated();
+         if (!authenticated) {
+            navigate("/login");
+         }
+      };
+      checkAuth();
+   }, []);
    useEffect(() => {
       const fetchData = async () => {
          try {

@@ -5,9 +5,10 @@ import {
    dropUserCart,
    getCartItems,
    getProductDetailsById,
+   isAuthenticated,
    removeItemFromCartById,
 } from "@/utils/auth";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import RenderCartProducts from "./RenderCartProducts";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,15 @@ const CartPage = () => {
       products.reduce((sum, item) => sum + item.price, 0).toFixed(2)
    );
 
+   useLayoutEffect(() => {
+      const checkAuth = async () => {
+         const authenticated = await isAuthenticated();
+         if (!authenticated) {
+            navigate("/login");
+         }
+      };
+      checkAuth();
+   }, []);
    const handleRemoveFromCart = (id: string) => {
       removeItemFromCartById(id);
       setProducts(products.filter((item) => item._id !== id));
